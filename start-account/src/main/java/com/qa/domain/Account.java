@@ -1,15 +1,20 @@
 package com.qa.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Account {
 
+	@GeneratedValue
+	@Id
+	private Long id;
 	private String firstName;
 	private String secondName;
-	private String accountNumber;
+	private long accountNumber;
 
-	public Account(String firstName, String secondName, String accountNumber) {
+	public Account(String firstName, String secondName, long accountNumber) {
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.accountNumber = accountNumber;
@@ -31,12 +36,21 @@ public class Account {
 		this.secondName = secondName;
 	}
 
-	public String getAccountNumber() {
+	public long getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(String accountNumber) {
+	public void setAccountNumber(long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }
+

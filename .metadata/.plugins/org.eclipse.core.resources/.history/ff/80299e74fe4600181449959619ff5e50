@@ -1,0 +1,10 @@
+package com.qa.domain;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+public class AccountPersistence {
+	@PersistenceContext(unitName = "primary")
+	private EntityManager em;
+	
+}
