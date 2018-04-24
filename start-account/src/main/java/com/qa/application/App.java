@@ -17,12 +17,11 @@ public class App {
 		service.addAccountFromMap(joeBloggs);
 		service.addAccountFromMap(janeBloggs);
 		service.addAccountFromMap(samStone);
-		
+
 		String mapAsJSON = util.getJSONForObject(service.getAccountMap());
 		System.out.println("This is the account map as JSON " + mapAsJSON);
-		
-		AccountEM business = new AccountEM();
-		business.findAccount(1234);
+		AccountEM buisness = new AccountEM();
+
 	}
 
 }

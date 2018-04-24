@@ -1,5 +1,6 @@
 package com.qa.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,9 +10,13 @@ public class Account {
 
 	@GeneratedValue
 	@Id
-	private Long id;
+	
 	private String firstName;
+	@Column(length=40)
 	private String secondName;
+	@Id @GeneratedValue() 
+	private Long id;
+	@Column(length=40)
 	private long accountNumber;
 
 	public Account(String firstName, String secondName, long accountNumber) {
