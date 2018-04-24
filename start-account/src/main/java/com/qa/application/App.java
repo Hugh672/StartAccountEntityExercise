@@ -5,6 +5,7 @@ import com.qa.service.AccountService;
 import com.qa.util.JSONUtil;
 
 import business.AccountEM;
+import business.AccountImp;
 
 public class App {
 
@@ -20,7 +21,7 @@ public class App {
 
 		String mapAsJSON = util.getJSONForObject(service.getAccountMap());
 		System.out.println("This is the account map as JSON " + mapAsJSON);
-		AccountEM buisness = new AccountEM();
+		AccountImp business = new AccountEM();
 
 	}
 

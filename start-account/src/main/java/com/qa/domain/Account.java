@@ -8,16 +8,14 @@ import javax.persistence.Id;
 @Entity
 public class Account {
 
-	@GeneratedValue
-	@Id
-	
+	@Column(length=40)
 	private String firstName;
 	@Column(length=40)
 	private String secondName;
 	@Id @GeneratedValue() 
-	private Long id;
-	@Column(length=40)
+	private long id;
 	private long accountNumber;
+
 
 	public Account(String firstName, String secondName, long accountNumber) {
 		this.firstName = firstName;
