@@ -14,10 +14,10 @@ public interface AccountImp {
 
 	List<Account> findAllAccounts();
 
-	void createAccount(Account account);
+	String createAccount(Account account);
 
-	void deleteAccount(Account account);
+	String deleteAccount(Account account);
 
-	void updateAccount(long id, String accountAsJSON);
+	String updateAccount(long id, String accountAsJSON);
 
 }

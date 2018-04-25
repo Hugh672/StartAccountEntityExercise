@@ -1,4 +1,4 @@
-package business;
+package com.qa.business;
 
 import static org.junit.Assert.*;
 
@@ -6,41 +6,49 @@ import javax.persistence.EntityManager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.qa.domain.Account;
-import com.qa.util.JSONUtil;
 
 import business.AccountEM;
+import business.AccountImp;
+import com.qa.domain.Account;
+import com.qa.util.JSONUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccountEMTest {
 	
 	@InjectMocks
-	private AccountImp accEmImp = new AccountEM();
+	private AccountImp accDBImp = new AccountEM();
 	
 	@Mock 
 	private EntityManager em;
 	
-	@Mock
+	
+	@Mock 
 	private Account account;
+	
 	
 	@Mock 
 	JSONUtil ju;
-
+	
+	
 	@Test
 	public void createAccountTest() {
-		assertEquals(accEmImp.createAccount(account),"Account has been created");
+		assertEquals(accDBImp.createAccount(account),"Account has been created");
 	}
 	
 	@Test 
 	public void deleteAccountTest() {
-		assertEquals(accEmImp.deleteAccount(account),"Account has been deleted");
+		assertEquals(accDBImp.deleteAccount(account),"Account has been deleted");
 	}
 	@Test
-	public void findAccount() {
+	public void findAccountTest() {
 		Mockito.when(em.find((Account.class),1L)).thenReturn(account);
-		assertEquals(accEmImp.findAccount(1L),account);
+		assertEquals(accDBImp.findAccount(1L),account);
 	}
+	
 	
 }

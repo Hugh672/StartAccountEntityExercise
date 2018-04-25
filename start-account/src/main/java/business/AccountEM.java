@@ -4,6 +4,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
+
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +15,7 @@ import javax.persistence.TypedQuery;
 import com.qa.domain.Account;
 import com.qa.util.JSONUtil;
 
+@Default
 @Transactional(SUPPORTS)
 public class AccountEM implements AccountImp {
 	
@@ -21,54 +24,47 @@ public class AccountEM implements AccountImp {
 
 	@Inject
 	JSONUtil ju;
-	
-    /* (non-Javadoc)
-	 * @see business.AccountImp#findAccount(java.lang.Long)
-	 */
+    
     @Override
 	public Account findAccount(Long id) {
         return em.find(Account.class, id);
     }
-    
-    /* (non-Javadoc)
-	 * @see business.AccountImp#findAllAccounts()
-	 */
+ 
     @Override
 	public List<Account> findAllAccounts(){
     	TypedQuery<Account> query = em.createQuery("SELECT a FROM Account a ORDER BY a.firstName DESC", Account.class);
     	return query.getResultList();
     }
     
-    /* (non-Javadoc)
-	 * @see business.AccountImp#createAccount(com.qa.domain.Account)
-	 */
     @Override
 	@Transactional(REQUIRED)
-    public void createAccount(Account account) {
+    public String createAccount(Account account) {
     	em.persist(account);
+    	return "Account has been created";
     }
     
-    /* (non-Javadoc)
-	 * @see business.AccountImp#deleteAccount(com.qa.domain.Account)
-	 */
     @Override
 	@Transactional(REQUIRED)
-    public void deleteAccount(Account account) {
+    public String deleteAccount(Account account) {
     	em.remove(account);
+    	return "Account has been deleted";
     }
-    /* (non-Javadoc)
-	 * @see business.AccountImp#updateAccount(long, java.lang.String)
-	 */
+   
     @Override
 	@Transactional(REQUIRED)
-    public void updateAccount(long id, String accountAsJSON) {
+    public String updateAccount(long id, String accountAsJSON) {
     	Account original=em.find(Account.class,id);
     	Account updated=ju.getObjectForJSON(accountAsJSON,Account.class);
-    	em.merge(updated);
+    	if (original!=null) {
+    		em.merge(updated);
+    		return "Account has been updated";
+    	}
+    	
+    	return "Account has not been updated";
     }
     
  
 
-
-
 }
+
+
